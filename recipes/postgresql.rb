@@ -5,9 +5,9 @@
 # Install Postgresql and create specified databases and users.
 #
 
-root_password = node["databox"]["root_password"]
+root_password = node["databox"]["db_root_password"]
 if root_password
-  Chef::Log.warn %(Set node["postgresql"]["password"]["postgres"] attributes to node["databox"]["root_password"])
+  Chef::Log.info %(Set node["postgresql"]["password"]["postgres"] attributes to node["databox"]["db_root_password"])
   node.set["postgresql"]["password"]["postgres"] = root_password
 end
 

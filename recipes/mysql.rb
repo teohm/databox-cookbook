@@ -5,9 +5,9 @@
 # Install MySQL and create specified databases and users.
 #
 
-root_password = node["databox"]["root_password"]
+root_password = node["databox"]["db_root_password"]
 if root_password
-  Chef::Log.warn %(Set mysql.server_*_password attributes to node["databox"]["root_password"])
+  Chef::Log.info %(Set mysql.server_*_password attributes to node["databox"]["db_root_password"])
   node.set["mysql"]["server_root_password"] = root_password
   node.set["mysql"]["server_repl_password"] = root_password
   node.set["mysql"]["server_debian_password"] = root_password
