@@ -35,6 +35,9 @@ node["databox"]["databases"]["postgresql"].each do |entry|
 
   postgresql_database entry["database_name"] do
     connection postgresql_connection_info
+    template entry["template"] if entry["template"]
+    encoding entry["encoding"] if entry["encoding"]
+    collation entry["collation"] if entry["collation"]    
     action :create
   end
 
