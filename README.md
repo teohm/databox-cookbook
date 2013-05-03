@@ -1,4 +1,4 @@
-# Chef cookbook - databox (v0.1.0)
+# Chef cookbook - databox (v0.1.1)
 
 Setup a **database server** that runs multiple MySQL and PostgreSQL databases.
 
@@ -133,6 +133,10 @@ Pull requests, issue and test reports are welcomed to better support your platfo
    * mysql
    * postgresql
    * database
+   
+## Change History
+
+See [CHANGELOG](CHANGELOG.md).
 
 ## License and Authors
 
