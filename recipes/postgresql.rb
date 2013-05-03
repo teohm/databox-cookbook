@@ -37,7 +37,9 @@ node["databox"]["databases"]["postgresql"].each do |entry|
     connection postgresql_connection_info
     template entry["template"] if entry["template"]
     encoding entry["encoding"] if entry["encoding"]
-    collation entry["collation"] if entry["collation"]    
+    collation entry["collation"] if entry["collation"]
+    connection_limit entry["connection_limit"] if entry["connection_limit"]
+    owner entry["owner"] if entry["owner"]
     action :create
   end
 

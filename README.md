@@ -35,7 +35,7 @@ You **should** set the database root password:
    * for **PostgreSQL**, it overwrites `postgres` user password in `postgresql` cookbook:
      * `node.set["postgresql"]["password"]["postgres"]`
  
-To install **MySQL**, set a list of MySQL database entries. Each database entry may contain [`database_user` attribute parameters in `database` cookbook](https://github.com/opscode-cookbooks/database#attribute-parameters-1):
+To install **MySQL**, provide a list of database entries:
 
   * `node["databox"]["databases"]["mysql"]` (default: `[]`)
     
@@ -50,12 +50,28 @@ To install **MySQL**, set a list of MySQL database entries. Each database entry 
       {
         "database_name" => "app2_production",
         "username" => "app2",
-        "password" => "app2_pass"
+        "password" => "app2_pass",
+        "encoding" => "UTF8",
+        "collation" => "utf8_unicode_ci"
       }
     ]
     ```
+    
+    Each database entry may contain resource parameters specified in [`database`](https://github.com/opscode-cookbooks/database) cookbook:
 
-To install **PostgreSQL**, set a list of PostgreSQL database entries. Each database entry may contain [`database_user` attribute parameters in `database` cookbook](https://github.com/opscode-cookbooks/database#attribute-parameters-1):
+    * [`database_user`](https://github.com/opscode-cookbooks/database#attribute-parameters-1) resource parameters:
+      * username
+      * password
+      * database_name
+      * connection
+      * privileges
+      * host
+      * table
+    * [`database`](https://github.com/opscode-cookbooks/database/blob/master/libraries/resource_database.rb) resource parameters needed by MySQL:
+      * collation
+      * encoding
+
+To install **PostgreSQL**, provide a list of database entries:
 
   * `node["databox"]["databases"]["postgresql"]` (default: `[]`)
     
@@ -70,10 +86,31 @@ To install **PostgreSQL**, set a list of PostgreSQL database entries. Each datab
       {
         "database_name" => "app2_production",
         "username" => "app2",
-        "password" => "app2_pass"
+        "password" => "app2_pass",
+        "encoding" => "UTF8",
+        "collation" => en_US.utf8"
       }
     ]
     ```
+    
+    Each database entry may contain resource parameters specified in [`database`](https://github.com/opscode-cookbooks/database) cookbook:
+
+    * [`database_user`](https://github.com/opscode-cookbooks/database#attribute-parameters-1) resource parameters:
+      * username
+      * password
+      * database_name
+      * connection
+      * privileges
+      * host
+      * table
+    * [`database`](https://github.com/opscode-cookbooks/database/blob/master/libraries/resource_database.rb) resource parameters:
+      * template
+      * collation
+      * encoding
+      * tablespace
+      * connection_limit
+      * owner
+
 
 ## Recipes
 

@@ -27,6 +27,8 @@ node["databox"]["databases"]["mysql"].each do |entry|
 
   mysql_database entry["database_name"] do
     connection mysql_connection_info
+    encoding entry["encoding"] if entry["encoding"]
+    collation entry["collation"] if entry["collation"]
     action :create
   end
 
