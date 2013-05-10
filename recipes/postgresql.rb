@@ -5,6 +5,10 @@
 # Install Postgresql and create specified databases and users.
 #
 
+# for postgres UTF-8
+Chef::Log.info "Set LANGUAGE environment variables to #{node["databox"]["postgresql"]["language"]}"
+ENV['LANGUAGE'] = ENV['LANG'] = ENV['LC_ALL'] = node["databox"]["postgresql"]["language"]
+
 root_password = node["databox"]["db_root_password"]
 if root_password
   Chef::Log.info %(Set node["postgresql"]["password"]["postgres"] attributes to node["databox"]["db_root_password"])
