@@ -15,14 +15,14 @@ include_recipe "postgresql::client"
 include_recipe "postgresql::server"
 include_recipe "database::postgresql"
 
-#TODO Chef 11 compat?
-node.set['postgresql']['pg_hba'] = [
-  {:type => 'local', :db => 'all', :user => 'postgres', :addr => nil, :method => 'ident'},
-  {:type => 'local', :db => 'all', :user => 'all', :addr => nil, :method => 'md5'},
-  {:type => 'host', :db => 'all', :user => 'all', :addr => '127.0.0.1/32', :method => 'md5'},
-  {:type => 'host', :db => 'all', :user => 'all', :addr => '::1/128', :method => 'md5'}
-]
-
+# Replace the line `local all all ident`
+#             with `local all all md5`
+node.set['postgresql']['pg_hba'].map! do |line|
+  if line[:type] == 'local' && line[:db] == 'all' && line[:user] == 'all' && line[:addr] == nil && line[:method] == 'ident' then
+    line[:method] = 'md5'
+  end
+  line
+end
 
 postgresql_connection_info = {
   :host => "localhost",
