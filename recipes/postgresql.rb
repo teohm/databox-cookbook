@@ -18,7 +18,7 @@ include_recipe "database::postgresql"
 # Replace the line `local all all ident`
 #             with `local all all md5`
 node.set['postgresql']['pg_hba'].map! do |line|
-  if line[:type] = 'local' && line[:db] = 'all' && line[:addr] = nil then
+  if line[:type] == 'local' && line[:db] == 'all' && line[:addr] == nil then
     line[:method] = 'md5'
   end
   line
